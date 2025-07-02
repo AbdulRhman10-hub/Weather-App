@@ -22,14 +22,14 @@ class WeatherScreen extends StatelessWidget {
                     SizedBox(height: 30,),
                     Row(
                       children: [
-                        Image.asset('assets/images/download.png',height: 50,width: 50,),
+                        Image.asset('assets/images/cloudy.png',height: 50,width: 50,),
                         Spacer(),
                         Text("17",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         Spacer(),
                         Column(
                           children: [
-                    Text("MaxTemp: 24",style: TextStyle(fontSize: 10),),
-                    Text("MinTemp: 16",style: TextStyle(fontSize: 10),),
+                    Text("Maxtemp: 24",style: TextStyle(fontSize: 10),),
+                    Text("Mintemp: 16",style: TextStyle(fontSize: 10),),
                           ],
                         ),
                       ],
