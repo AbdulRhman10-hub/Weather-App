@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/Cubits/get_current_weather/get_weather_cubits.dart';
 import 'package:weather_app/Views/Widgets/custom_app_bar.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -6,6 +8,7 @@ class WeatherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  var weatherModel = BlocProvider.of<GetWeatherCubits>(context).weatherModel;
     return Scaffold(
       body: Column(
         children: [
@@ -17,25 +20,25 @@ class WeatherScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Alexandria",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                    Text("updated at 23:46",style: TextStyle(fontSize: 14),),
+                    Text(weatherModel.city,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    Text("updated at: ${weatherModel.date.hour}:${weatherModel.date.minute}",style: TextStyle(fontSize: 14),),
                     SizedBox(height: 30,),
                     Row(
                       children: [
-                        Image.asset('assets/images/cloudy.png',height: 50,width: 50,),
+                        Image.network("https:${weatherModel.image}",height: 50,width: 50,),  // looking at the error we found that the error because the url have not (https:)
                         Spacer(),
-                        Text("17",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Text("${weatherModel.temp}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         Spacer(),
                         Column(
                           children: [
-                    Text("Maxtemp: 24",style: TextStyle(fontSize: 10),),
-                    Text("Mintemp: 16",style: TextStyle(fontSize: 10),),
+                    Text("Maxtemp: ${weatherModel.maxTemp.round()}",style: TextStyle(fontSize: 10),), // round for the earlest number ex: 12.2 => 12 and 12.8 => 13
+                    Text("Mintemp: ${weatherModel.minTemp.round()}",style: TextStyle(fontSize: 10),),
                           ],
                         ),
                       ],
                     ),
                     SizedBox(height: 30,),
-                    Text("Ligh Rain ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    Text(weatherModel.state,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                 
                   ],
                 ),

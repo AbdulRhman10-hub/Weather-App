@@ -1,9 +1,9 @@
 class WeatherModel {
   final String city;
-  final String date;
-  final double temp;     // not String but double
-  final double maxTemp;  // not String but double
-  final double minTemp;  // not String but double
+  final DateTime date; // Must to convert it to DateTime because it comming as String from API
+  final double temp; // not String but double
+  final double maxTemp; // not String but double
+  final double minTemp; // not String but double
   final String state;
   final String image;
 
@@ -19,7 +19,7 @@ class WeatherModel {
   factory WeatherModel.fromJson(json) {
     return WeatherModel(
       city: json['location']['name'],
-      date: json['current']['last_updated'],
+      date: DateTime.parse(json['current']['last_updated']), // convert from String to DateTime
       temp: json['forecast']['forecastday'][0]['day']['avgtemp_c'],
       image: json['forecast']['forecastday'][0]['day']['condition']['icon'],
       maxTemp: json['forecast']['forecastday'][0]['day']['maxtemp_c'],
