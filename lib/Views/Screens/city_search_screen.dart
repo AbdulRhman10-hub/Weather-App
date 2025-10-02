@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,7 @@ class CitySearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber.shade600,
+        backgroundColor: Colors.orange,
         title: Text(
           "Search a City ",
           style: TextStyle(color: Colors.white),
@@ -35,7 +34,7 @@ class CitySearchScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 150),
           child: TextField(
             onSubmitted: (value) {
-              BlocProvider.of<GetWeatherCubits>(context)
+              BlocProvider.of<GetWeatherCubit>(context)
                   .getWeather(cityName: value);
               Navigator.pop(context);
               //                    // Before using cubit (using global variable (weatheModel) and this is bad)
